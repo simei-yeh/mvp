@@ -34,7 +34,7 @@ npm run build
 
 ## API Endpoints
 
-API endpoints conform to a RESTful API architecture to retrieve and modify database-hosted information. All responses will include HTTP response codes to indicate status and errors and data will come in JSON pretty format. All requests must include a Content-Type of application/json and the body must be valid JSON.
+API endpoints conform to a RESTful API architecture to retrieve and modify database-hosted information. All responses will include HTTP response codes to indicate status and errors and data will come in JSON. All requests must include a Content-Type of application/json and the body must be valid JSON.
 
 **GET /api/listings/:listingid**
 - GET request for a single listing
