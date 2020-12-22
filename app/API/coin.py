@@ -6,12 +6,14 @@ import json
 
 token = config.COIN
 
-endpoint = 'https://rest-sandbox.coinapi.io/v1/exchangerate/'
+asset_id_base = 'BTC'
+asset_id_quote = 'USD'
+endpoint = 'https://rest.coinapi.io/v1/exchangerate/{}/{}'.format(asset_id_base, asset_id_quote)
 headers = { 'content-type': 'application/json', 'X-CoinAPI-Key' : token }
-payload = { 'apikey': token, 'asset_id_base': 'BTC', 'asset_id_quote': 'ETH' }
+payload = { 'invert': 'false' }
 
 response = requests.get(endpoint, headers=headers, params=payload)
-print(response.url)
+
 
 def jprint(obj):
     # create a formatted string of the Python JSON object
