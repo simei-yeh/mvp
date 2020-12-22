@@ -1,9 +1,19 @@
 print("Hello world")
 
+
+import config
 import requests
 import json
+import os
 
-response = requests.get("http://api.open-notify.org/astros.json")
+token = config.ALPHAVANTAGE
+print(token)
+
+endpoint = 'https://www.alphavantage.co/query'
+payload = {'function': 'TIME_SERIES_INTRADAY', 'symbol': 'TSLA', 'interval': '60min', 'apikey': token }
+
+
+response = requests.get(endpoint, params=payload)
 
 def jprint(obj):
     # create a formatted string of the Python JSON object
