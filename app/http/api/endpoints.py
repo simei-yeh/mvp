@@ -17,13 +17,13 @@ app.config.update({
 oidc = OpenIDConnect(app)
 CORS(app)
 
-@app.route("/kudos", methods=["GET"])
+@app.route("/tradetheta", methods=["GET"])
 @oidc.accept_token(True)
 def index():
   return json_response(Kudo(g.oidc_token_info['sub']).find_all_kudos())
 
 
-@app.route("/kudos", methods=["POST"])
+@app.route("/tradetheta/<text:ticker>/:type", methods=["GET"])
 @oidc.accept_token(True)
 def create():
   github_repo = GithubRepoSchema().load(json.loads(request.data))

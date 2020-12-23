@@ -13,7 +13,7 @@ payload = {'g': 'GLOBAL', 'count': '100', 'limit': '100'}
 response = requests.get(endpoint, headers=headers, params=payload)
 print(response.url)
 
-substring_list = ['takeoff', 'moon', '\ud83d\ude80', 'gang', 'calls', 'thank you', 'tendies', 'yolo']
+substring_list = ['takeoff', 'moon', u"\U0001F680", u"\uE11D", 'gang', 'calls', 'thank you', 'tendies', 'yolo', 'bought', 'short squeeze', 'squeeze', 'tendy', 'tendie', 'thanks']
 
 def jprint(obj):
     matches = []
