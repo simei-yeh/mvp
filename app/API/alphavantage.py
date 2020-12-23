@@ -4,10 +4,8 @@ print("Hello world")
 import config
 import requests
 import json
-import os
 
 token = config.ALPHAVANTAGE
-print(token)
 
 endpoint = 'https://www.alphavantage.co/query'
 payload = {'function': 'TIME_SERIES_INTRADAY', 'symbol': 'TSLA', 'interval': '60min', 'apikey': token }

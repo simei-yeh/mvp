@@ -8,6 +8,7 @@ response = requests.get("http://api.open-notify.org/astros.json")
 def jprint(obj):
     # create a formatted string of the Python JSON object
     text = json.dumps(obj, sort_keys=True, indent=2)
-    print(text)
+    json_data = json.loads(text)
+    print(json_data)
 
 jprint(response.json())

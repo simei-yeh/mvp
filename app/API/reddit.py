@@ -13,9 +13,17 @@ payload = {'g': 'GLOBAL', 'count': '100', 'limit': '100'}
 response = requests.get(endpoint, headers=headers, params=payload)
 print(response.url)
 
+substring_list = ['takeoff', 'moon', '\ud83d\ude80', 'gang', 'calls', 'thank you', 'tendies', 'yolo']
+
 def jprint(obj):
-    # create a formatted string of the Python JSON object
-    text = json.dumps(obj, sort_keys=True, indent=2)
-    print(text)
+    matches = []
+    count = 0
+    for x in obj['data']['children']:
+        count += 1
+        if any( y in x['data']['title'] for y in substring_list):
+            matches.append(x['data']['name'])
+        print(x['data']['title'])
+        print(x['data']['selftext'])
+    print(matches, count)
 
 jprint(response.json())
