@@ -19,20 +19,22 @@ def scrapeReddit():
     for x in endpoint_list:
         endpoint = 'https://www.reddit.com/r/wallstreetbets/{}.json'.format(x)
         r = requests.get(endpoint, headers=headers, params=payload).json()
+
         for x in r['data']['children']:
-            temp = '{}{}'.format(x['data']['title'], x['data']['selftext'])
+            s = x['data']
+            temp = '{}{}'.format(s['title'], s['selftext'])
 
             if any( y in temp for y in substring_list ):
                 count += 1
                 formatData = {
-                'title' : x['data']['title'],
+                'title' : s['title'],
                 # 'text' : x['data']['selftext']
-                'ups' : x['data']['ups'],
-                'upvote_ratio' : x['data']['upvote_ratio'],
-                'score' : x['data']['score'],
-                'comment_count' : x['data']['num_comments']
+                'ups' : s['ups'],
+                'upvote_ratio' : s['upvote_ratio'],
+                'score' : s['score'],
+                'comment_count' : s['num_comments']
                 }
-                matches[x['data']['name']] = (formatData)
+                matches[s['name']] = (formatData)
 
     print(matches, count)
 
