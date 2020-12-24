@@ -13,7 +13,7 @@ def dict_factory(cursor, row):
     return d
 
 # update static route
-@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def home():
     # query = 'SELECT * from vol.crypto'
     # connect(query)
