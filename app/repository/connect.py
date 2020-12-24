@@ -1,27 +1,33 @@
 from config import config
 import psycopg2
 
-def connect():
+def connect(query, params):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
         # read connection parameters
-        params = config()
+        configs = config()
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect(**params)
+        conn = psycopg2.connect(**configs)
 
         # create a cursor
         cur = conn.cursor()
 
 	# execute a statement
         print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
 
-        # display the PostgreSQL database server version
+        cur.execute(query, params)
+
+        # display the results of the query
         db_version = cur.fetchone()
+        results = cur.fetchall()
         print(db_version)
+        print(results)
+
+        # return the results to the API
+        return db_version
 
 	# close the communication with the PostgreSQL
         cur.close()
@@ -32,4 +38,6 @@ def connect():
             conn.close()
             print('Database connection closed.')
 
-connect()
+
+if __name__ == '__main__':
+    connect()
