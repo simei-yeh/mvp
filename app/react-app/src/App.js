@@ -1,13 +1,18 @@
-import logo from './logo.svg';
 import React, { useState, useEffect } from 'react'
 import './App.css';
 
 function App() {
+// eslint-disable-next-line
   const [initialData, setInitialData] = useState([{}])
 
   useEffect(() => {
-    fetch('/')
-    .then(response => response.json())
+    fetch('/api', {
+      headers : {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
+    .then(response => response.text())
     .then(data => console.log(data))
   })
   return (

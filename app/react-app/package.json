@@ -13,10 +13,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-flask-api" : "cd ../repository &&  . /home/syeh/.local/share/virtualenvs/repository-xsQ1Uz-i/bin/activate && flask run",
+    "start-flask-api": "cd ../repository &&  . /home/syeh/.local/share/virtualenvs/repository-xsQ1Uz-i/bin/activate && flask run",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch": "npm-watch"
   },
   "eslintConfig": {
     "extends": [
@@ -37,7 +38,7 @@
     ]
   },
   "proxy": "http://127.0.0.1:5000/",
-  "watch" : {
-    "build": "src/"
+  "devDependencies": {
+    "axios": "^0.21.1"
   }
 }
