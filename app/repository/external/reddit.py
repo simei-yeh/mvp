@@ -12,6 +12,8 @@ payload = {'g': 'GLOBAL', 'count': '100', 'limit': '100'}
 
 substring_list = ['takeoff', 'moon', u"\U0001F680", u"\uE11D", u"\uE04C", 'gang', 'calls', 'thank you', 'tendies', 'yolo', 'bought', 'short squeeze', 'squeeze', 'tendy', 'tendie', 'thanks', '']
 
+ticker_list= ['']
+
 def scrapeReddit():
     matches = {}
     count = 0
@@ -24,11 +26,18 @@ def scrapeReddit():
             s = x['data']
             temp = '{}{}'.format(s['title'], s['selftext'])
 
+            with open('redditData.json','a') as format:
+                format.write(temp)
+
+
+
+
             if any( y in temp for y in substring_list ):
                 count += 1
                 formatData = {
-                'title' : s['title'],
+                # 'title' : s['title'],
                 # 'text' : x['data']['selftext']
+                # 'ticker' : ticker,
                 'ups' : s['ups'],
                 'upvote_ratio' : s['upvote_ratio'],
                 'score' : s['score'],

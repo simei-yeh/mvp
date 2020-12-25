@@ -3,7 +3,12 @@ print("Hello world")
 import requests
 import json
 
-response = requests.get("http://api.open-notify.org/astros.json")
+endpoint="https://localhost:5000/v1/api/iserver/secdef/strikes"
+headers = { 'content-type': 'application/json;charset=utf-8' }
+payload = { 'conid': '444857009', 'sectype':'OPT', 'month': 'JAN21'}
+
+response = requests.get(endpoint, headers=headers, params=payload, verify=False)
+
 
 def jprint(obj):
     # create a formatted string of the Python JSON object
