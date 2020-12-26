@@ -22,8 +22,7 @@ CREATE TABLE vol.stocks (
   low NUMERIC(8,2) NOT NULL CONSTRAINT positive_low CHECK (low > 0),
   close NUMERIC(8,2) NOT NULL CONSTRAINT positive_close CHECK (close > 0),
   volume NUMERIC NOT NULL CONSTRAINT positive_volume CHECK (volume >= 0),
-  interval NUMERIC NOT NULL,
-  -- PRIMARY KEY (listings_id)
+  interval NUMERIC NOT NULL
 )
 
 
@@ -45,8 +44,7 @@ CREATE TABLE vol.options (
   high NUMERIC(8,2) NOT NULL CONSTRAINT positive_high CHECK (high > 0),
   low NUMERIC(8,2) NOT NULL CONSTRAINT positive_low CHECK (low > 0),
   close NUMERIC(8,2) NOT NULL CONSTRAINT positive_close CHECK (close > 0),
-  volume NUMERIC NOT NULL CONSTRAINT positive_volume CHECK (volume >= 0),
-  -- PRIMARY KEY (users_id)
+  volume NUMERIC NOT NULL CONSTRAINT positive_volume CHECK (volume >= 0)
 )
 
 
@@ -83,8 +81,7 @@ CREATE TABLE vol.wsb (
   indicator_bearish boolean,
   karma int NOT NULL,
   popularity int NOT NULL,
-  comments int NOT NULL,
-  -- PRIMARY KEY (bookings_id)
+  comments int NOT NULL
 )
 
 -- CONSTRAINT fk_listings references herkbath.listings(id) ON DELETE CASCADE
