@@ -1,6 +1,6 @@
 print("Hello world")
 
-from config import config
+from connect import connect
 import tokens
 import requests
 import json
@@ -14,15 +14,13 @@ endpoint = 'https://rest.coinapi.io/v1/exchangerate/{}/{}'.format(asset_id_base,
 headers = { 'content-type': 'application/json', 'X-CoinAPI-Key' : token }
 payload = { 'invert': 'true' }
 
-
-
 def setInterval(func,time):
     e = threading.Event()
     while not e.wait(time):
         func()
         print('done with interval request')
 
-def jprint():
+def coinQuotes():
     #send request to server
     r = (requests.get(endpoint, headers=headers, params=payload)).json()
     print(r)
@@ -35,5 +33,5 @@ def jprint():
     print('done with current request')
 
 
-jprint()
-# setInterval(jprint, 120)
+coinQuotes()
+# setInterval(coinQuotes, 120)

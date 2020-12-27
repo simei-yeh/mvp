@@ -1,7 +1,7 @@
 from config import config
 import psycopg2
 
-def connect(query, params):
+def connect(query, qtype="fetch", params=None):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
@@ -16,15 +16,19 @@ def connect(query, params):
         cur = conn.cursor()
 
 	# execute a statement
-        print('PostgreSQL database version:')
+        print('executing query')
 
         cur.execute(query, params)
 
         # display the results of the query
-        db_version = cur.fetchone()
-        results = cur.fetchall()
-        print(db_version)
-        print(results)
+        if qtype == "fetch":
+            db_version = cur.fetchone()
+            results = cur.fetchall()
+            print(db_version)
+            print(results)
+        elif qtype == "insert":
+            conn.commit()
+            db_version =  'row inserted'
 
         # return the results to the API
         return db_version

@@ -1,9 +1,12 @@
 print("Hello world")
 
+from connect import connect
 import tokens
 import requests
 import json
 import re
+import threading
+import time
 
 user = tokens.REDDITUSER
 endpoint_list = ['hot','new','rising','top']
@@ -29,8 +32,15 @@ ticker_alias= {'game stop': 'GME',
                     'gilead': 'GILD',
                     'tilray': 'TLRY'}
 
+def setInterval(func,time):
+    e = threading.Event()
+    while not e.wait(time):
+        func()
+        print('done with interval request')
+
+
 def scrapeReddit():
-    matches = []
+    matches = {}
     count = 0
 
     for x in endpoint_list:
@@ -44,12 +54,17 @@ def scrapeReddit():
             if any( y.lower() in temp for y in substring_list ) and (any( a.upper() in temp for a in ticker_list) 
             or any (a.lower() in temp for a in ticker_alias.keys())):
                 formatData = {key: s[key] for key in s.keys() 
-                    & {'ups', 'upvote_ratio','score','num_comments' }} 
+                    & {'ups', 'upvote_ratio','score','num_comments','created','name' }}
                 formatData['ticker'] =  [x for x in ticker_list if x in temp] + [val for key,val in ticker_alias.items() if key in temp]
-                matches.append(formatData)
-                count += 1
-    
-    print(matches, count)
+                queryObj=json.dumps(formatData)
+
+                query = "INSERT INTO vol.wsb SELECT * FROM json_populate_record (NULL::vol.wsb,'{}') \
+                    ON CONFLICT (name) DO UPDATE SET(created,name,ticker,score,ups,upvote_ratio,num_comments)= \
+                        (SELECT * FROM json_populate_record (NULL::vol.wsb,'{}'))".format(queryObj, queryObj)
+                
+                # created,name,ticker,score,ups,upvote_ratio,num_comments
+               
+                results = connect(query,"insert")    
 
 if __name__ == "__main__":
-    scrapeReddit()
+    setInterval(scrapeReddit,300)

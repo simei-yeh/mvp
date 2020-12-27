@@ -1,5 +1,6 @@
 print("Hello world")
 
+from connect import connect
 import requests
 import json
 

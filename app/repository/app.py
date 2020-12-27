@@ -6,17 +6,9 @@ import psycopg2
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
-
 # update static route
 @app.route('/api', methods=['GET'])
 def home():
-    # query = 'SELECT * from vol.crypto'
-    # connect(query)
     return '''hello world'''
 
 
