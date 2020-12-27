@@ -21,17 +21,22 @@ def setInterval(func,time):
         print('done with interval request')
 
 def coinQuotes():
+
     #send request to server
     r = (requests.get(endpoint, headers=headers, params=payload)).json()
-    print(r)
+
     # organize data into csv file
     for x in r['rates']:
-        with open('formattedCoin.csv', 'a') as ftdC:
-            ftdC.write('USD,{},{},{}\n'.format(x['asset_id_quote'],x['rate'],x['time']) )
+        x['asset_id_base'] = "USD"
+        data = json.dumps(x)
+        query = "INSERT INTO vol.crypto (time,asset_id_base,asset_id_quote,rate)  \
+            SELECT time,asset_id_base,asset_id_quote,rate FROM json_populate_record (NULL::vol.crypto,'{}')".format(data, data)
+
+        res = connect(query,"insert")
 
     # copy data into database
-    print('done with current request')
+    print(len(r['rates']))
 
-
-coinQuotes()
+if __name__ == "__main__":
+    coinQuotes()
 # setInterval(coinQuotes, 120)
