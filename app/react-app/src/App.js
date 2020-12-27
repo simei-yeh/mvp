@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css';
 
-function App() {
-// eslint-disable-next-line
-  const [initialData, setInitialData] = useState([{}])
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  useEffect(() => {
+    }
+  }
+
+
+  componentDidMount() {
+    this.retrieveInitialData()
+  }
+
+  retrieveInitialData() {
     fetch('/api', {
-      headers : {
+      headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
+      }
     })
-    .then(response => response.text())
-    .then(data => console.log(data))
-  })
-  return (
-    <div className="App">
-      <h1>checking</h1>
-    </div>
-  );
+      .then(response => response.text())
+      .then(data => console.log(data))
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>checking</h1>
+      </div>
+    )
+  }
 }
 
 export default App;
