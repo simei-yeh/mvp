@@ -1,2 +1,5 @@
 config.py
 database.ini
+tokens.py
+*tokens*
+*config*
