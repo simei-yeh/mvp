@@ -67,4 +67,4 @@ def scrapeReddit():
                 results = connect(query,"insert")    
 
 if __name__ == "__main__":
-    setInterval(scrapeReddit,300)
+    scrapeReddit()

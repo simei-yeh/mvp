@@ -9,6 +9,10 @@ app.config["DEBUG"] = True
 # update static route
 @app.route('/api', methods=['GET'])
 def home():
+    query1 = "select to_timestamp(created) at time zone 'pst' at time zone 'utc', \
+        b.* from vol.wsb b where to_timestamp(b.created) > \
+            (current_timestamp - interval '1 day')"
+    query2 = 
     return '''hello world'''
 
 
