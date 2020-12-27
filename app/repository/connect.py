@@ -9,14 +9,12 @@ def connect(query, qtype="fetch", params=None):
         configs = config()
 
         # connect to the PostgreSQL server
-        print('Connecting to the PostgreSQL database...')
         conn = psycopg2.connect(**configs)
 
         # create a cursor
         cur = conn.cursor()
 
 	# execute a statement
-        print('executing query')
 
         cur.execute(query, params)
 
@@ -40,7 +38,6 @@ def connect(query, qtype="fetch", params=None):
     finally:
         if conn is not None:
             conn.close()
-            print('Database connection closed.')
 
 
 if __name__ == '__main__':
