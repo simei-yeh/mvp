@@ -1,5 +1,8 @@
 import React from 'react'
 import './App.css';
+import Reddit from './Reddit.jsx'
+import AltCoins from './AltCoins.jsx'
+import Graph from './Graph.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -29,6 +32,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>checking</h1>
+        <Graph />
+        <Reddit />
+        <AltCoins />
       </div>
     )
   }
