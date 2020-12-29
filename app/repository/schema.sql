@@ -15,13 +15,11 @@ DROP TABLE IF EXISTS vol.stocks;
 
 CREATE TABLE vol.stocks (
   stockCode varchar NOT NULL PRIMARY KEY,
-  t timestamp,
+  t timestamp default CURRENT_TIMESTAMP,
   symbol text,
-  o NUMERIC(15,2) NOT NULL CONSTRAINT positive_open CHECK (open > 0),
-  h NUMERIC(15,2) NOT NULL CONSTRAINT positive_high CHECK (high > 0),
-  l NUMERIC(15,2) NOT NULL CONSTRAINT positive_low CHECK (low > 0),
-  c NUMERIC(15,2) NOT NULL CONSTRAINT positive_close CHECK (close > 0),
-  v NUMERIC NOT NULL CONSTRAINT positive_volume CHECK (volume >= 0),
+  data json NOT NULL,
+  pricefactor int NOT NULL,
+  volumefactor int NOT NULL,
   timePeriod varchar NOT NULL,
   barLength numeric(10)
 )

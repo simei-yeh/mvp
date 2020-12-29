@@ -18,17 +18,27 @@ def getConId():
     for x in conids:
       for y in timeOpts:
         payload = dict({ 'conid': x[0] }, **y)
-        print(payload)
-        r = requests.get(endpoint, headers=headers, params=payload, verify=False).json()
+        try:
+          r = requests.get(endpoint, headers=headers, params=payload, verify=False).json()
+          # print(x,y, r)
+          stockData = ({key.lower() : r[key] for key in r.keys() & { 'timePeriod','symbol','barLength','volumeFactor','priceFactor','data' }})
+          stockData['stockcode'] = '{}-{}-{}'.format(r['symbol'],r['timePeriod'],r['barLength'])
+        except Exception as exc:
+          print ('could not receive stock data ', exc)
+          print ('first catch', x, y)
+          pass
 
-        data = ({key: r[0][key] for key in r[0].keys() & { 'conid','symbol' }})
-        data['opt']=[r[0]['opt']]
-        formatted = json.dumps(data)
-        query = "INSERT INTO vol.stocks SELECT * from json_populate_record(NULL::vol.stocks,'{}') ON CONFLICT (stockCode) DO UPDATE SET(opt) = \
-          (SELECT opt FROM json_populate_record (NULL::vol.stocks,'{}'))".format(formatted,formatted)
 
-    #     results = connect(query,"insert")
-    #     print(results, '', x)
+        formatted = json.dumps(stockData)
+        query = "INSERT INTO vol.stocks SELECT * from json_populate_record(NULL::vol.stocks,'{}') ON CONFLICT (stockcode) DO UPDATE SET(data) = \
+          (SELECT data FROM json_populate_record (NULL::vol.stocks,'{}'))".format(formatted,formatted)
+
+        try:
+          results = connect(query,"insert")
+        except Exception as exc:
+          print('could not insert ', exc)
+          print('second catch ', x, y)
+          pass
 
 
 if __name__ == "__main__":
