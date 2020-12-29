@@ -3,6 +3,7 @@ import './App.css';
 import Reddit from './Reddit.jsx'
 import AltCoins from './AltCoins.jsx'
 import Graph from './Graph.jsx'
+import Quotes from './Quotes.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -31,10 +32,19 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>checking</h1>
-        <Graph />
-        <Reddit />
-        <AltCoins />
+        <div className="headerContainer">
+          <h1>tradetheta.io</h1>
+        </div>
+        <div className="boxesContainer">
+          <div className="numbers">
+            <Graph />
+            <Quotes />
+          </div>
+          <div className="sources">
+            <Reddit />
+            <AltCoins />
+          </div>
+        </div>
       </div>
     )
   }

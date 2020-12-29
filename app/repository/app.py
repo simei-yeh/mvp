@@ -1,6 +1,6 @@
 import flask
 from flask import request, jsonify
-from connect import connect
+from .connect import connect
 import psycopg2
 
 app = flask.Flask(__name__)

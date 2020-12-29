@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -35,4 +37,23 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.boxesContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
 }
