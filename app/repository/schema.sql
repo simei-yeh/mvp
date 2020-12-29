@@ -82,8 +82,9 @@ DROP TABLE IF EXISTS vol.wsb
 
 CREATE TABLE vol.wsb (
   created float DEFAULT EXTRACT(EPOCH FROM CURRENT_TIMESTAMP),
-  name text NOT NULL PRIMARY KEY,
-  ticker text[] NOT NULL,
+  rankCode text NOT NULL PRIMARY KEY,
+  name text NOT NULL,
+  ticker text NOT NULL,
   score int NOT NULL,
   ups int NOT NULL,
   upvote_ratio float NOT NULL,

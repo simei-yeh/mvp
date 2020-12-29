@@ -51,22 +51,20 @@ def scrapeReddit():
             s = x['data']
             temp = '{}{}'.format(s['title'], s['selftext'])
 
-            if any( y.lower() in temp for y in substring_list ) and (any( a.upper() in temp for a in ticker_list)
-            or any (a.lower() in temp for a in ticker_alias.keys())):
+
+            if any( y.lower() in temp for y in substring_list ):
+              #  (any( a.upper() in temp for a in ticker_list) or any (a.lower() in temp for a in ticker_alias.keys()))
+              for a in [x for x in ticker_list if x in temp] + [val for key,val in ticker_alias.items() if key in temp]:
                 count += 1
-                formatData = {key: s[key] for key in s.keys()
-                    & {'ups', 'upvote_ratio','score','num_comments','created','name' }}
-                formatData['ticker'] =  [x for x in ticker_list if x in temp] + [val for key,val in ticker_alias.items() if key in temp]
-                queryObj=json.dumps(formatData)
+                formatData = {key: s[key] for key in s.keys() & {'ups', 'upvote_ratio','score','num_comments','created','name' }}
+                data = dict({'ticker': a, 'rankcode': '{}-{}'.format(a,s['name'])}, **formatData)
+                queryObj=json.dumps(data)
 
                 query = "INSERT INTO vol.wsb SELECT * FROM json_populate_record (NULL::vol.wsb,'{}') \
-                    ON CONFLICT (name) DO UPDATE SET(created,name,ticker,score,ups,upvote_ratio,num_comments)= \
-                        (SELECT * FROM json_populate_record (NULL::vol.wsb,'{}'))".format(queryObj, queryObj)
-
-                # created,name,ticker,score,ups,upvote_ratio,num_comments
+                  ON CONFLICT (rankcode) DO UPDATE SET(score,ups,upvote_ratio,num_comments) = (SELECT score,ups,upvote_ratio,num_comments FROM json_populate_record (NULL::vol.wsb,'{}'))".format(queryObj, queryObj)
 
                 results = connect(query,"insert")
-                print(results)
+                # print(results)
     print(count)
 
 if __name__ == "__main__":
