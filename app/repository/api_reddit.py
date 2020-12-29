@@ -17,7 +17,7 @@ payload = {'g': 'GLOBAL', 'count': '100', 'limit': '100'}
 substring_list = ['takeoff', 'moon', u"\U0001f48e", u"\U0001F680", "\ud83d\ude80",u"\uE11D", u"\uE04C", 'gang', 'calls', 'thank you','diamond hand','tendies', 'yolo', 'bought', 'short squeeze', 'squeeze', 'tendy', 'tendie', 'thanks', 'home run', 'gain','bulls','gang']
 
 ticker_list= ['GME', 'STIC', 'NIO', 'PLTR', 'TSLA', 'BABA', 'AAPL', 'DKNG', 'MT',
-'IPOC', 'FCEL', 'PENN', 'NKLA', 'ARK', 'QS', 'GILD', 'PSTH', 'MVIS', 'TLRY','MARA','CRSR','ETSY','CHWY','MRNA','FVRR']
+'IPOC', 'FCEL', 'PENN', 'NKLA', 'QS', 'GILD', 'PSTH', 'MVIS', 'TLRY','MARA','CRSR','ETSY','CHWY','MRNA','FVRR']
 
 ticker_alias= {'game stop': 'GME',
                     'gamestop': 'GME',

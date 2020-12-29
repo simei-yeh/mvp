@@ -25,6 +25,17 @@ CREATE TABLE vol.stocks (
   interval NUMERIC NOT NULL
 )
 
+DROP TABLE IF EXISTS vol.conid;
+
+CREATE TABLE vol.conid (
+  conid int NOT NULL PRIMARY KEY,
+  symbol text NOT NULL,
+  companyName text NOT NULL,
+  opt varchar[] DEFAULT NULL
+)
+
+
+
 
 -- ---
 -- Table 'options'

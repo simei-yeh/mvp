@@ -1,4 +1,4 @@
-from .config import config
+from config import config
 import psycopg2
 
 def connect(query, qtype="fetch", params=None):
@@ -20,10 +20,8 @@ def connect(query, qtype="fetch", params=None):
 
         # display the results of the query
         if qtype == "fetch":
-            db_version = cur.fetchone()
-            results = cur.fetchall()
+            db_version = cur.fetchall()
             print(db_version)
-            print(results)
         elif qtype == "insert":
             conn.commit()
             db_version =  'row inserted'

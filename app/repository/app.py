@@ -12,7 +12,8 @@ def home():
     query1 = "select to_timestamp(created) at time zone 'pst' at time zone 'utc', \
         b.* from vol.wsb b where to_timestamp(b.created) > \
             (current_timestamp - interval '1 day')"
-    return '''hello world'''
+    results=connect(query1,"fetch")
+    return jsonify(results)
 
 
 @app.errorhandler(404)
@@ -42,7 +43,7 @@ def api_filter():
     # strip the last AND from the query
     query = query[:-4]
 
-    results = connect(query, to_filter)
+    results = connect(query, "fetch", to_filter)
     print(results)
 
     return jsonify(results)
