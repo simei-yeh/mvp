@@ -85,6 +85,7 @@ CREATE TABLE vol.wsb (
   rankCode text NOT NULL PRIMARY KEY,
   name text NOT NULL,
   ticker text NOT NULL,
+  weighted_score float not null,
   score int NOT NULL,
   ups int NOT NULL,
   upvote_ratio float NOT NULL,

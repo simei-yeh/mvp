@@ -9,9 +9,7 @@ app.config["DEBUG"] = True
 # update static route
 @app.route('/api', methods=['GET'])
 def home():
-    query1 = "select to_timestamp(created) at time zone 'pst' at time zone 'utc', \
-        b.* from vol.wsb b where to_timestamp(b.created) > \
-            (current_timestamp - interval '1 day')"
+    query1 = "select sum(b.weighted_score) as total_w_score, sum(b.num_comments) as tot_comments, sum(b.score) as tot_score, b.ticker from vol.wsb b where to_timestamp(b.   created) > (current_timestamp - interval '1 day') group by b.ticker"
     results=connect(query1,"fetch")
     return jsonify(results)
 

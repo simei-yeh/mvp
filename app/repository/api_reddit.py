@@ -57,11 +57,11 @@ def scrapeReddit():
               for a in [x for x in ticker_list if x in temp] + [val for key,val in ticker_alias.items() if key in temp]:
                 count += 1
                 formatData = {key: s[key] for key in s.keys() & {'ups', 'upvote_ratio','score','num_comments','created','name' }}
-                data = dict({'ticker': a, 'rankcode': '{}-{}'.format(a,s['name'])}, **formatData)
+                data = dict({'ticker': a, 'rankcode': '{}-{}'.format(a,s['name']), 'weighted_score': round(s['ups']*s['upvote_ratio']+0.75*s['num_comments'],3)}, **formatData)
                 queryObj=json.dumps(data)
 
                 query = "INSERT INTO vol.wsb SELECT * FROM json_populate_record (NULL::vol.wsb,'{}') \
-                  ON CONFLICT (rankcode) DO UPDATE SET(score,ups,upvote_ratio,num_comments) = (SELECT score,ups,upvote_ratio,num_comments FROM json_populate_record (NULL::vol.wsb,'{}'))".format(queryObj, queryObj)
+                  ON CONFLICT (rankcode) DO UPDATE SET(score,ups,upvote_ratio,num_comments,weighted_score) = (SELECT score,ups,upvote_ratio,num_comments,weighted_score FROM json_populate_record (NULL::vol.wsb,'{}'))".format(queryObj, queryObj)
 
                 results = connect(query,"insert")
                 # print(results)
