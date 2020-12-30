@@ -9,11 +9,13 @@ app.config["DEBUG"] = True
 # update static route
 @app.route('/api', methods=['GET'])
 def home():
-    query1 = "select sum(b.weighted_score) as total_w_score, sum(b.num_comments) as tot_comments, sum(b.score) as tot_score, b.ticker from vol.wsb b where to_timestamp(b.   created) > (current_timestamp - interval '1 day') group by b.ticker"
+    query1 = "SELECT SUM(b.weighted_score) as total_w_score, SUM(b.num_comments) as tot_comments, SUM(b.score) as tot_score, b.ticker FROM vol.wsb b WHERE to_timestamp(b.   created) > (current_timestamp - interval '1 day') GROUP BY b.ticker"
     results=connect(query1,"fetch")
-    query2 = "select * from vol.stocks where stockcode = 'TSLA-1m-1800'"
+    query2 = "SELECT * FROM vol.stocks WHERE stockcode = 'TSLA-1m-1800'"
     results2=connect(query2, "fetch")
-    return jsonify(results, results2)
+    query3 = "SELECT DISTINCT ON (c.asset_id_quote) c.time,c.asset_id_quote,c.rate FROM vol.crypto c WHERE c.asset_id_quote in ('BTC','ETH','BCH','LTC','EOS','DASH','OXT')  ORDER BY c.asset_id_quote, c.time desc"
+    results3=connect(query3, "fetch")
+    return jsonify(results, results2, results3)
 
 
 @app.errorhandler(404)
