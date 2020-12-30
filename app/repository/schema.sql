@@ -5,7 +5,7 @@ DROP DATABASE IF EXISTS tradetheta
 CREATE DATABASE tradetheta
 
 -- ---
--- Table 'stonks'
+-- Table 'stocks'
 --
 -- ---
 
@@ -23,6 +23,12 @@ CREATE TABLE vol.stocks (
   timePeriod varchar NOT NULL,
   barLength numeric(10)
 )
+
+-- ---
+-- Table 'conids' for IBKR API
+--
+-- ---
+
 
 DROP TABLE IF EXISTS vol.conid;
 
@@ -92,27 +98,3 @@ CREATE TABLE vol.wsb (
   num_comments int NOT NULL
 )
 
--- CONSTRAINT fk_listings references herkbath.listings(id) ON DELETE CASCADE
---CONSTRAINT fk_listings references herkbath.listings(id)
--- CONSTRAINT fk_users references herkbath.users(id)
--- ---
--- Foreign Keys
--- ---
--- ---
--- Table Properties
--- ---
-
--- ALTER TABLE listings ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE bookings ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE users ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ---
--- Test Data
--- ---
-
--- INSERT INTO listings (id,dailyPrice,weeklyDiscount,monthlyDiscount,max_guests,min_stay,max_stay) VALUES
--- ('','','','','','','');
--- INSERT INTO bookings (id,checkin,checkout,adults,children,infants,id_listings,id_users) VALUES
--- ('','','','','','','','');
--- INSERT INTO users (id,username) VALUES
--- ('','');

@@ -11,7 +11,9 @@ app.config["DEBUG"] = True
 def home():
     query1 = "select sum(b.weighted_score) as total_w_score, sum(b.num_comments) as tot_comments, sum(b.score) as tot_score, b.ticker from vol.wsb b where to_timestamp(b.   created) > (current_timestamp - interval '1 day') group by b.ticker"
     results=connect(query1,"fetch")
-    return jsonify(results)
+    query2 = "select * from vol.stocks where stockcode = 'TSLA-1m-1800'"
+    results2=connect(query2, "fetch")
+    return jsonify(results, results2)
 
 
 @app.errorhandler(404)
