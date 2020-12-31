@@ -23,7 +23,8 @@ class Graph extends React.Component {
           data: this.props.data.map(d => d[0]),
           backgroundColor: this.props.color
         }]
-      }
+      },
+
     });
   }
 

@@ -17,13 +17,49 @@ class AltCoins extends React.Component {
     this.myChart = new Chart(this.chartRef.current, {
       type: 'bar',
       data: {
-        labels: this.props.data.map(d => d[2].toFixed(2)),
+        labels: this.props.data.map(d => d[1]),
         datasets: [{
           label: this.props.title,
-          data: this.props.data.map(d => d[1]),
-          backgroundColor: this.props.color
+          data: this.props.data.map(d => d[2].toFixed(2)),
+          backgroundColor: 'rgba(112,202,209, 0.7)'
         }]
-      }
+      },
+        options: {
+        events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
+        scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'weighted popularity'
+            },
+            type: 'logarithmic',
+            position: 'left',
+            ticks: {
+              min: 0, //minimum tick
+              max: 35000, //maximum tick
+              callback: function (value, index, values) {
+                return Number(value.toString());//pass tick values as a string into Number function
+              },
+            },
+            afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
+              chartObj.ticks = [];
+              chartObj.ticks.push(10);
+              chartObj.ticks.push(100);
+              chartObj.ticks.push(500);
+              chartObj.ticks.push(1000);
+              chartObj.ticks.push(10000);
+              chartObj.ticks.push(20000);
+              chartObj.ticks.push(35000);
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'crypto'
+            },
+          }],
+        }
+      },
     });
   }
 

@@ -53,7 +53,6 @@ class App extends React.Component {
           <div className="sources">
             <Reddit data={this.state.reddit}
               title="reddit data"
-              color="#FF4500"
             />
             <AltCoins data={this.state.altCoinPrices}
             title="Crypto Quotes"
