@@ -9,7 +9,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      reddit: [],
+      stockGraph: [],
+      altCoinPrices: []
     }
   }
 
@@ -25,9 +27,15 @@ class App extends React.Component {
         'Accept': 'application/json'
       }
     })
-      .then(response => response.text())
-      .then(data => console.log(data))
-  }
+    .then(response => response.json())
+    .then((data) => {
+        this.setState({
+          reddit: data[0],
+          stockGraph: data[1],
+          altCoinPrices: data[2]
+        })
+      })
+    }
 
   render() {
     return (
@@ -37,12 +45,20 @@ class App extends React.Component {
         </div>
         <div className="boxesContainer">
           <div className="numbers">
-            <Graph />
+            <Graph data={this.state.stockGraph}
+            title="TSLA 1 year"
+            color="#FF4500"
+            />
             <Quotes />
           </div>
           <div className="sources">
-            <Reddit />
-            <AltCoins />
+            <Reddit data={this.state.reddit}
+              title="reddit data"
+              color="#FF4500"
+            />
+            <AltCoins data={this.state.altCoinPrices}
+            title="Crypto Quotes"
+            color="#70CAD1"/>
           </div>
         </div>
       </div>
