@@ -49,7 +49,6 @@ class App extends React.Component {
             title="TSLA 1 year"
             color="#FF4500"
             />
-            <Quotes />
           </div>
           <div className="sources">
             <Reddit data={this.state.reddit}

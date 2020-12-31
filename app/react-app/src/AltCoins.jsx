@@ -1,4 +1,5 @@
 import React from 'react'
+import Chart from 'chart.js';
 
 class AltCoins extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class AltCoins extends React.Component {
 
   componentDidUpdate() {
     this.myChart.data.labels = this.props.data.map(d => d[1]);
-    this.myChart.data.datasets[0].data = this.props.data.map(d => d[2]);
+    this.myChart.data.datasets[0].data = this.props.data.map(d => d[2].toFixed(2));
     this.myChart.update();
   }
 
@@ -16,7 +17,7 @@ class AltCoins extends React.Component {
     this.myChart = new Chart(this.chartRef.current, {
       type: 'bar',
       data: {
-        labels: this.props.data.map(d => d[2]),
+        labels: this.props.data.map(d => d[2].toFixed(2)),
         datasets: [{
           label: this.props.title,
           data: this.props.data.map(d => d[1]),
