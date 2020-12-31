@@ -9,7 +9,7 @@ app.config["DEBUG"] = True
 # update static route
 @app.route('/api', methods=['GET'])
 def home():
-    query1 = "SELECT SUM(b.weighted_score) as total_w_score, SUM(b.num_comments) as tot_comments, SUM(b.score) as tot_score, b.ticker FROM vol.wsb b WHERE to_timestamp(b.   created) > (current_timestamp - interval '1 day') GROUP BY b.ticker order by total_w_score desc"
+    query1 = "SELECT SUM(b.weighted_score) as total_w_score, SUM(b.num_comments) as tot_comments, SUM(b.score) as tot_score, b.ticker, count(b.name) FROM vol.wsb b WHERE to_timestamp(b.   created) > (current_timestamp - interval '1 day') GROUP BY b.ticker order by total_w_score desc"
     results=connect(query1,"fetch")
     query2 = "SELECT * FROM vol.stocks WHERE stockcode = 'TSLA-1m-1800'"
     results2=connect(query2, "fetch")
