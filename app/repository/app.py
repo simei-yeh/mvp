@@ -65,14 +65,10 @@ def api_stocks():
         query += ' symbol=(%s) AND'
         to_filter.append(ticker)
     if interval:
-        query += ' barLength=(%s) AND'
+        query += ' barLength=(%s)'
         to_filter.append(interval)
     if not (ticker or interval):
         return page_not_found(404)
-
-    # strip the last AND from the query
-    query = query[:-4]
-    print(query)
 
     results = connect(query, "fetch", to_filter)
     print(results)
