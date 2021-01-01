@@ -11,7 +11,7 @@ app.config["DEBUG"] = True
 def home():
     query1 = "SELECT SUM(b.weighted_score) as total_w_score, SUM(b.num_comments) as tot_comments, SUM(b.score) as tot_score, b.ticker, count(b.name) FROM vol.wsb b WHERE to_timestamp(b.   created) > (current_timestamp - interval '1 day') GROUP BY b.ticker order by total_w_score desc"
     results=connect(query1,"fetch")
-    query2 = "SELECT * FROM vol.stocks WHERE stockcode = 'TSLA-1m-1800'"
+    query2 = "SELECT * FROM vol.stocks WHERE stockcode = 'TSLA-1m-30min'"
     results2=connect(query2, "fetch")
     query3 = "SELECT * FROM (SELECT DISTINCT ON (c.asset_id_quote) c.time,c.asset_id_quote,c.rate FROM vol.crypto c WHERE c.asset_id_quote in ('BTC','ETH','BCH','LTC','EOS','DASH')  ORDER BY c.asset_id_quote, c.time desc) as a ORDER BY a.rate desc"
     results3=connect(query3, "fetch")

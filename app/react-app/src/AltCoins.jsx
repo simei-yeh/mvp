@@ -30,7 +30,7 @@ class AltCoins extends React.Component {
           yAxes: [{
             scaleLabel: {
               display: true,
-              labelString: 'weighted popularity'
+              labelString: 'price vs USD'
             },
             type: 'logarithmic',
             position: 'left',
@@ -55,7 +55,7 @@ class AltCoins extends React.Component {
           xAxes: [{
             scaleLabel: {
               display: true,
-              labelString: 'crypto'
+              labelString: 'cryptocurrency'
             },
           }],
         }

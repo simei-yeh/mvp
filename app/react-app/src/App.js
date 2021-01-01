@@ -47,12 +47,13 @@ class App extends React.Component {
           <div className="numbers">
             <Graph data={this.state.stockGraph}
             title="TSLA 1 year"
-            color="#FF4500"
+            color="#B08EA2"
             />
           </div>
           <div className="sources">
             <Reddit data={this.state.reddit}
-              title="reddit data"
+              title="reddit popularity"
+              color="#FF4500"
             />
             <AltCoins data={this.state.altCoinPrices}
             title="Crypto Quotes"

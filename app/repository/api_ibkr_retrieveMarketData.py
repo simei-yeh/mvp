@@ -22,7 +22,7 @@ def getConId():
           r = requests.get(endpoint, headers=headers, params=payload, verify=False).json()
           # print(x,y, r)
           stockData = ({key.lower() : r[key] for key in r.keys() & { 'timePeriod','symbol','barLength','volumeFactor','priceFactor','data' }})
-          stockData['stockcode'] = '{}-{}-{}'.format(r['symbol'],r['timePeriod'],r['barLength'])
+          stockData['stockcode'] = '{}-{}-{}'.format(r['symbol'],r['timePeriod'],payload['bar'])
         except Exception as exc:
           print ('could not receive stock data ', exc)
           print ('first catch', x, y)
