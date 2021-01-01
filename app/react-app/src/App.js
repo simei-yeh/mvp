@@ -30,6 +30,12 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then((data) => {
+        data[0].map(d => {
+          let x = Math.random() * 256;
+          let y = Math.random() * 256;
+          let z = Math.random() * 256;
+          d.push([x,y,z])
+        })
         this.setState({
           reddit: data[0],
           stockGraph: data[1],
@@ -38,7 +44,7 @@ class App extends React.Component {
       })
   }
 
-  retrieveAdditionalData(ticker, interval=1800) {
+  retrieveAdditionalData(ticker, interval = 1800) {
     console.log('click!', ticker, interval)
     fetch(`/api/v1/quotes/stocks?ticker=${ticker}&interval=${interval}`, {
       headers: {
@@ -48,7 +54,9 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then((data) => {
-        console.log(data)
+        this.setState({
+          stockGraph: data
+        })
       })
   }
 

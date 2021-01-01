@@ -1,12 +1,11 @@
 print("Hello world")
 
 from connect import connect
+import random
 import tokens
 import requests
 import json
-import re
 import threading
-import time
 
 user = tokens.REDDITUSER
 endpoint_list = ['hot','new','rising','top']
@@ -40,7 +39,6 @@ def setInterval(func,time):
 
 
 def scrapeReddit():
-    matches = {}
     count = 0
 
     for x in endpoint_list:
