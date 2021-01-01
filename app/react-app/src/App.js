@@ -40,20 +40,16 @@ class App extends React.Component {
 
   retrieveAdditionalData(ticker, interval=1800) {
     console.log('click!', ticker, interval)
-    // fetch('/api', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json'
-    //   }
-    // })
-    //   .then(response => response.json())
-    //   .then((data) => {
-    //     this.setState({
-    //       reddit: data[0],
-    //       stockGraph: data[1],
-    //       altCoinPrices: data[2]
-    //     })
-    //   })
+    fetch(`/api/v1/quotes/stocks?ticker=${ticker}&interval=${interval}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+      })
   }
 
   render() {

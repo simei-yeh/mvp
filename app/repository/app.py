@@ -24,7 +24,7 @@ def page_not_found(e):
 
 # retrieve information for a specific crypto
 @app.route('/api/v1/quotes/crypto', methods=['GET'])
-def api_filter():
+def api_crypto():
     query_parameters = request.args
 
     id = query_parameters.get('id')
@@ -51,8 +51,8 @@ def api_filter():
     return jsonify(results)
 
 # retrieve information for a specific stock ticker
-@app.route('/api/v1/quotes/ticker', methods=['GET'])
-def api_filter():
+@app.route('/api/v1/quotes/stocks', methods=['GET'])
+def api_stocks():
     query_parameters = request.args
 
     ticker = query_parameters.get('ticker')
@@ -72,6 +72,7 @@ def api_filter():
 
     # strip the last AND from the query
     query = query[:-4]
+    print(query)
 
     results = connect(query, "fetch", to_filter)
     print(results)
