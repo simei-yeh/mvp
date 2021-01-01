@@ -39,7 +39,12 @@ class Reddit extends React.Component {
       options: {
         events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
         onClick: (e) => {
+          let dataset = this.myChart.getDatasetAtEvent(e)
 
+          if (dataset.length > 0) {
+            let point = this.props.data[dataset[0]._datasetIndex][3];
+            this.props.getTicker(point)
+          }
         },
         responsive: true,
         maintainAspectRatio: false,
