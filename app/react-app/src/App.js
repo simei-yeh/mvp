@@ -38,8 +38,8 @@ class App extends React.Component {
       })
   }
 
-  retrieveAdditionalData() {
-    console.log('click!')
+  retrieveAdditionalData(ticker, interval=1800) {
+    console.log('click!', ticker, interval)
     // fetch('/api', {
     //   headers: {
     //     'Content-Type': 'application/json',

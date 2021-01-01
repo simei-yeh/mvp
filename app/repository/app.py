@@ -50,5 +50,34 @@ def api_filter():
 
     return jsonify(results)
 
+# retrieve information for a specific stock ticker
+@app.route('/api/v1/quotes/ticker', methods=['GET'])
+def api_filter():
+    query_parameters = request.args
+
+    ticker = query_parameters.get('ticker')
+    interval = query_parameters.get('interval')
+
+    query = "SELECT * FROM vol.stocks WHERE"
+    to_filter = []
+
+    if ticker:
+        query += ' symbol=(%s) AND'
+        to_filter.append(ticker)
+    if interval:
+        query += ' barLength=(%s) AND'
+        to_filter.append(interval)
+    if not (ticker or interval):
+        return page_not_found(404)
+
+    # strip the last AND from the query
+    query = query[:-4]
+
+    results = connect(query, "fetch", to_filter)
+    print(results)
+
+    return jsonify(results)
+
+
 if __name__ == "__main__":
     app.run()
