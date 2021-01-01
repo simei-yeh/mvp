@@ -51,11 +51,19 @@
   flex-direction: column;
   height: 400px;
   min-width: 768px;
+  max-width: 991px;
 }
 
-.sources {
+.bottom-chart-container {
   display: flex;
   flex-direction: row;
-  height: 300px;
+  height: 400px;
   min-width: 768px;
+  max-width: 991px;
+}
+
+.bottom-chart-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1;
 }

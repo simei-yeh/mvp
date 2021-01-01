@@ -25,6 +25,10 @@ class Graph extends React.Component {
           backgroundColor: 'rgb(176,142,162,0.2)'
         }]
       },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
     });
   }
 

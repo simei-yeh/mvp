@@ -7,9 +7,26 @@ class Reddit extends React.Component {
     this.chartRef = React.createRef();
   }
 
+  parseChartData() {
+    let chartData = []
+    this.props.data.map(d => {
+      let x = Math.random() * 256;
+      let y = Math.random() * 256;
+      let z = Math.random() * 256;
+      let datapoint = {
+        label: d[3],
+        data: [{ 'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0]) * 3 }],
+        backgroundColor: `rgba(${x},${y},${z},0.5)`,
+        hoverBorderWidth : 8,
+        hoverBackgroundColor: `rgba(${x},${y},${z},1)`,
+      }
+      chartData.push(datapoint);
+    });
+    return chartData;
+  }
+
   componentDidUpdate() {
-    this.myChart.data.labels = this.props.data.map(d => d[3]);
-    this.myChart.data.datasets[0].data = this.props.data.map((d, i) => ({ 'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0]) * 3 }));
+    this.myChart.data.datasets = this.parseChartData();
     this.myChart.update();
   }
 
@@ -17,19 +34,11 @@ class Reddit extends React.Component {
     this.myChart = new Chart(this.chartRef.current, {
       type: 'bubble',
       data: {
-        labels: this.props.data.map(d => d[3]),
-        datasets: [{
-          label: this.props.title,
-          data: this.props.data.map((d, i) => ({ 'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0]) * 3 })),
-          backgroundColor: 'rgba(255,69,0,0.5)'
-        }]
+        datasets: this.parseChartData()
       },
       options: {
-        events: ['click', 'mousemove', 'mouseout'],
+        events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
         onClick: (e) => {
-
-        },
-        onHover: (e) => {
 
         },
         responsive: true,
@@ -52,7 +61,6 @@ class Reddit extends React.Component {
             },
             afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
               chartObj.ticks = [];
-              console.log(this)
             },
             gridLines: {
               tickMarkLength: 0// Adjusts the height for the tick marks area
@@ -70,15 +78,14 @@ class Reddit extends React.Component {
               min: 0, //minimum tick
               max: 8000, //maximum tick
               callback: function (value, index, values) {
-                return Number(value.toString());//pass tick values as a string into Number function
+                return value;
               },
             },
             afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
               chartObj.ticks = [];
-              console.log(this)
             }
           }],
-        }
+        },
       },
     });
   }

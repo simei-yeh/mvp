@@ -50,14 +50,14 @@ class App extends React.Component {
             color="#B08EA2"
             />
           </div>
-          <div className="sources">
-            <div>
+          <div className="bottom-chart-container">
+            <div className="bottom-chart-wrapper">
             <Reddit data={this.state.reddit}
               title="reddit popularity"
               color="#FF4500"
             />
             </div>
-            <div>
+            <div className="bottom-chart-wrapper">
             <AltCoins data={this.state.altCoinPrices}
             title="Crypto Quotes"
             color="#70CAD1"/>
