@@ -51,13 +51,17 @@ class App extends React.Component {
             />
           </div>
           <div className="sources">
+            <div>
             <Reddit data={this.state.reddit}
               title="reddit popularity"
               color="#FF4500"
             />
+            </div>
+            <div>
             <AltCoins data={this.state.altCoinPrices}
             title="Crypto Quotes"
             color="#70CAD1"/>
+            </div>
           </div>
         </div>
       </div>

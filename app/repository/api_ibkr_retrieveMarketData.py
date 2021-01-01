@@ -6,7 +6,7 @@ import json
 
 headers = { 'content-type': 'application/json;charset=utf-8' }
 
-timeOpts = [{'bar': '1d', 'period': '1y'}, {'bar': '1w', 'period': '5y'}, {'bar': '30min', 'period': '1m'}, {'bar':'15min','period':'1w'}]
+timeOpts = [{'bar': '1d', 'period': '9m'}, {'bar': '1w', 'period': '140w'}, {'bar': '30min', 'period': '2w'}, {'bar':'15min','period':'1w'}, {'bar':'5min','period':'1d'}]
 
 def getConId():
     # create a formatted string of the Python JSON object

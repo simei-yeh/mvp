@@ -24,7 +24,9 @@ class AltCoins extends React.Component {
           backgroundColor: 'rgba(112,202,209, 0.7)'
         }]
       },
-        options: {
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
         events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
         scales: {
           yAxes: [{
@@ -50,9 +52,14 @@ class AltCoins extends React.Component {
               chartObj.ticks.push(10000);
               chartObj.ticks.push(20000);
               chartObj.ticks.push(35000);
-            }
+            },
+
           }],
           xAxes: [{
+            gridLines: {
+              display: false,
+              tickMarkLength: 0
+            },
             scaleLabel: {
               display: true,
               labelString: 'cryptocurrency'

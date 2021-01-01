@@ -9,7 +9,7 @@ class Reddit extends React.Component {
 
   componentDidUpdate() {
     this.myChart.data.labels = this.props.data.map(d => d[3]);
-    this.myChart.data.datasets[0].data = this.props.data.map((d,i) => ({'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0])*3}));
+    this.myChart.data.datasets[0].data = this.props.data.map((d, i) => ({ 'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0]) * 3 }));
     this.myChart.update();
   }
 
@@ -20,18 +20,20 @@ class Reddit extends React.Component {
         labels: this.props.data.map(d => d[3]),
         datasets: [{
           label: this.props.title,
-          data: this.props.data.map((d,i) => ({'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0])*3})),
+          data: this.props.data.map((d, i) => ({ 'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0]) * 3 })),
           backgroundColor: 'rgba(255,69,0,0.5)'
         }]
       },
       options: {
-        events: ['click','mousemove', 'mouseout'],
+        events: ['click', 'mousemove', 'mouseout'],
         onClick: (e) => {
 
         },
         onHover: (e) => {
 
         },
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [{
             scaleLabel: {
@@ -43,12 +45,17 @@ class Reddit extends React.Component {
             ticks: {
               min: 0, //minimum tick
               max: 30000, //maximum tick
+              display: false,
               callback: function (value, index, values) {
                 return Number(value.toString());//pass tick values as a string into Number function
               },
             },
             afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
               chartObj.ticks = [];
+              console.log(this)
+            },
+            gridLines: {
+              tickMarkLength: 0// Adjusts the height for the tick marks area
             }
           }],
           xAxes: [{
@@ -59,6 +66,7 @@ class Reddit extends React.Component {
             type: 'logarithmic',
             position: 'left',
             ticks: {
+              display: false,
               min: 0, //minimum tick
               max: 8000, //maximum tick
               callback: function (value, index, values) {
@@ -67,6 +75,7 @@ class Reddit extends React.Component {
             },
             afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
               chartObj.ticks = [];
+              console.log(this)
             }
           }],
         }
