@@ -34,7 +34,7 @@ class Graph extends React.Component {
 
   render() {
     return (
-      <canvas ref={this.chartRef} />
+        <canvas ref={this.chartRef} />
     );
   }
 }

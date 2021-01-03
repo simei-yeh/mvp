@@ -3,6 +3,7 @@ import './App.css';
 import Reddit from './Reddit.jsx'
 import AltCoins from './AltCoins.jsx'
 import Graph from './Graph.jsx'
+import GraphOptions from './GraphOptions.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -63,10 +64,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="headerContainer">
-          <h1>tradetheta.io</h1>
+          <h1>tradetheta</h1>
         </div>
         <div className="boxesContainer">
           <div className="numbers">
+            <div>
+              <GraphOptions />
+            </div>
             <Graph data={this.state.stockGraph}
               color="#B08EA2"
             />
