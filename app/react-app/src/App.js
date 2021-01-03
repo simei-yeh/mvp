@@ -3,7 +3,6 @@ import './App.css';
 import Reddit from './Reddit.jsx'
 import AltCoins from './AltCoins.jsx'
 import Graph from './Graph.jsx'
-import Quotes from './Quotes.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -69,7 +68,6 @@ class App extends React.Component {
         <div className="boxesContainer">
           <div className="numbers">
             <Graph data={this.state.stockGraph}
-              title="TSLA 1 year"
               color="#B08EA2"
             />
           </div>

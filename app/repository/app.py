@@ -75,6 +75,25 @@ def api_stocks():
 
     return jsonify(results)
 
+@app.route('/api/v1/autosuggest', methods=['GET'])
+def autosuggest():
+    query_parameters = request.args
+
+    autosuggest = query_parameters.get('word')
+
+    query = "SELECT * FROM vol.stocks WHERE"
+    to_filter = []
+
+    if autosuggest:
+        query += ' symbol=(%s) AND'
+        to_filter.append(ticker)
+    if not (autosuggest):
+        return page_not_found(404)
+
+    results = connect(query, "fetch", to_filter)
+    print(results)
+
+    return jsonify(results)
 
 if __name__ == "__main__":
     app.run()

@@ -14,7 +14,7 @@ class Reddit extends React.Component {
         label: d[3],
         data: [{ 'x': d[1], 'y': d[0], 'r': d[0] < 10 ? d[0] : Math.log(d[0]) * 3 }],
         backgroundColor: `rgba(${d[5].join(',')},0.5)`,
-        hoverBorderWidth : 8,
+        hoverBorderWidth: 8,
         hoverBackgroundColor: `rgba(${d[5].join(',')},1)`,
       }
       chartData.push(datapoint);
@@ -24,7 +24,7 @@ class Reddit extends React.Component {
 
   componentDidUpdate() {
     this.myChart.data.datasets = this.parseChartData();
-    this.myChart.update({duration: 0});
+    this.myChart.update({ duration: 0 });
   }
 
   componentDidMount() {
@@ -36,7 +36,6 @@ class Reddit extends React.Component {
       options: {
         events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
         onClick: (e) => {
-          this.myChart.stop()
           let dataset = this.myChart.getDatasetAtEvent(e)
           if (dataset.length > 0) {
             let point = this.props.data[dataset[0]._datasetIndex][3];
@@ -98,7 +97,10 @@ class Reddit extends React.Component {
 
   render() {
     return (
-      <canvas ref={this.chartRef} />
+      <div>
+        <h3>Reddit popularity</h3>
+        <canvas ref={this.chartRef} />
+      </div>
     );
   }
 }

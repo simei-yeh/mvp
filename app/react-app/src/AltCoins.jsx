@@ -64,6 +64,7 @@ class AltCoins extends React.Component {
               display: true,
               labelString: 'cryptocurrency'
             },
+
           }],
         }
       },
@@ -72,7 +73,10 @@ class AltCoins extends React.Component {
 
   render() {
     return (
-      <canvas ref={this.chartRef} />
+      <div>
+        <h3>AltCoins Quotes</h3>
+        <canvas ref={this.chartRef} />
+      </div>
     );
   }
 }
