@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchDollar } from '@fortawesome/free-solid-svg-icons'
 import './GraphSearchBar.css';
 
-const GraphSearchBar = ({callback, autosuggest, suggestionsArray}) => {
+const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   const [value, setValue] = useState('');
-  const [submitted, setSubmitted] = useState(false)
-  const [suggestions, setSuggestions] = useState(suggestionsArray)
+  const [inputChange, setInputChange] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [suggestions, setSuggestions] = useState(suggestionsArray);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,10 +17,18 @@ const GraphSearchBar = ({callback, autosuggest, suggestionsArray}) => {
   const handleInputChange = (e) => {
     e.persist();
     setValue(e.target.value.toUpperCase());
-    autosuggest(value);
-    setSuggestions(suggestionsArray);
-    console.log(suggestions)
+    setInputChange(true);
   }
+
+  useEffect(() => {
+    if (inputChange) {
+      console.log('input changed')
+      autosuggest(value)
+      setInputChange(false);
+    } else {
+      setSuggestions(suggestionsArray)
+    }
+  }, [inputChange, suggestionsArray, autosuggest, value])
 
   useEffect(() => {
     if (submitted) {
@@ -28,12 +37,13 @@ const GraphSearchBar = ({callback, autosuggest, suggestionsArray}) => {
       setSubmitted(false);
       setValue('')
     }
-  }, [submitted])
+  }, [submitted, callback, value])
 
   return (
     <form className="search-bar-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="searchbar"></label>
-      <input type="text" name="searchbar" className="searchbar" onChange={handleInputChange} value={value}></input>
+      <input type="text" name="searchbar" className="searchbar" onChange={handleInputChange} value={value} placeholder="Type to search ticker"></input>
+
       <button className="icon"><FontAwesomeIcon icon={faSearchDollar} /></button>
     </form>
   );

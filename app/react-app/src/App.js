@@ -87,6 +87,7 @@ class App extends React.Component {
       this.setState({
         autosuggest: data
       })
+      console.log(data)
     })
   }
 

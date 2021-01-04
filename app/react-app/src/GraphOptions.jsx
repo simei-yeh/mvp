@@ -16,21 +16,13 @@ const GraphOptions = ({callback}) => {
     setTimeSelected(true);
   }
 
-  // useEffect(() => {
-  //   if (timeSelected) {
-  //     console.log('clicked ', timeValue)
-  //     callback(undefined, timeValue.option)
-  //     setTimeSelected(false)
-  //   }
-  // })
-
   useEffect(() => {
     if (timeSelected) {
       console.log('clicked ', timeValue)
       callback(undefined, timeValue.option)
       setTimeSelected(false)
     }
-  }, [timeSelected])
+  }, [timeSelected, timeValue, callback])
 
   return (
     <div className="options-bar-wrapper">
