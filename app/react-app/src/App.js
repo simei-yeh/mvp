@@ -35,7 +35,7 @@ class App extends React.Component {
           let x = Math.random() * 256;
           let y = Math.random() * 256;
           let z = Math.random() * 256;
-          d.push([x,y,z])
+          d.push([x, y, z])
         })
         this.setState({
           reddit: data[0],
@@ -45,8 +45,11 @@ class App extends React.Component {
       })
   }
 
-  retrieveAdditionalData(ticker, interval = 1800) {
+  retrieveAdditionalData(ticker = this.state.stockGraph[0][2], interval = 1800) {
     console.log('click!', ticker, interval)
+    if (interval === 'daily' || interval === 'weekly') {
+      interval = `1${interval.substring(0,1)}`
+    }
     fetch(`/api/v1/quotes/stocks?ticker=${ticker}&interval=${interval}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +73,7 @@ class App extends React.Component {
         <div className="boxesContainer">
           <div className="numbers">
             <div className="graph-search-options-wrapper">
-              <GraphOptions />
+              <GraphOptions callback={this.retrieveAdditionalData} />
               <GraphSearchBar />
             </div>
             <Graph data={this.state.stockGraph}

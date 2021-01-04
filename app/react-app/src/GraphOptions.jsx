@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import './GraphOptions.css'
 
-const GraphOptions = () => {
+const GraphOptions = ({callback}) => {
   const timeOptions = ['5min', '15min', '30min', 'daily', 'weekly']
 
   const[timeValue, setValue] = useState({option: '30min'})
 
   const handleTimeClick = (event) => {
-    event.persist();
     event.preventDefault();
     setValue((timeValue) => ({
       ...timeValue,
       option: event.target.value,
     }));
     console.log('clicked ', timeValue)
+    callback(undefined, timeValue.option)
   }
 
   return (
