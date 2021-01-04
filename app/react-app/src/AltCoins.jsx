@@ -8,7 +8,7 @@ class AltCoins extends React.Component {
   }
 
   componentDidUpdate() {
-    this.myChart.data.labels = this.props.data.map(d => d[1]);
+    this.myChart.data.labels = this.props.data.map(d => d[1].trim());
     this.myChart.data.datasets[0].data = this.props.data.map(d => d[2].toFixed(2));
     this.myChart.update();
   }
@@ -17,7 +17,7 @@ class AltCoins extends React.Component {
     this.myChart = new Chart(this.chartRef.current, {
       type: 'bar',
       data: {
-        labels: this.props.data.map(d => d[1]),
+        labels: this.props.data.map(d => d[1].trim()),
         datasets: [{
           label: this.props.title,
           data: this.props.data.map(d => d[2].toFixed(2)),
@@ -63,22 +63,6 @@ class AltCoins extends React.Component {
               display: true,
               labelString: 'cryptocurrency',
               align: 'center',
-            },
-            ticks: {
-              min: 0, //minimum tick
-              max: 40000, //maximum tick
-              callback: (label, index, values) => {
-                return label;//pass tick values as a string into Number function
-              },
-            },
-            afterBuildTicks: (chartObj) => { //Build ticks labelling as per your need
-              chartObj.ticks = [];
-              chartObj.ticks.push('BTC');
-              chartObj.ticks.push('ETH');
-              chartObj.ticks.push('BCH');
-              chartObj.ticks.push('LTC');
-              chartObj.ticks.push('DASH');
-              chartObj.ticks.push('EOS');
             },
           }],
         }
