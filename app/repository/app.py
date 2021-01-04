@@ -73,7 +73,11 @@ def api_stocks():
     results = connect(query, "fetch", to_filter)
     print(results)
 
-    return jsonify(results)
+    if not results:
+        print('could not find')
+        return page_not_found(404)
+    else:
+        return jsonify(results)
 
 @app.route('/api/v1/autosuggest', methods=['GET'])
 def autosuggest():
@@ -93,7 +97,11 @@ def autosuggest():
     results = connect(query, "fetch", to_filter)
     print(results)
 
-    return jsonify(results)
+    if not results:
+        print('could not find')
+        return page_not_found(404)
+    else:
+        return jsonify(results)
 
 if __name__ == "__main__":
     app.run()
