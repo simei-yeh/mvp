@@ -101,7 +101,10 @@ def autosuggest():
         print('could not find')
         return page_not_found(404)
     else:
-        return jsonify(results)
+        res = []
+        for l in results:
+            res.append(l[0])
+        return jsonify(res)
 
 if __name__ == "__main__":
     app.run()
