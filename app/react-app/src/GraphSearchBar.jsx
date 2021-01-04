@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearchDollar } from '@fortawesome/free-solid-svg-icons'
 import './GraphSearchBar.css';
 
 const GraphSearchBar = () => {
-  const timeOptions = ['5min', '15min', '30min', 'daily', 'weekly']
+
 
 
   return (
-    <div className="search-bar-wrapper">
-      {timeOptions.map(d => <button key={d}>{d}</button>)}
-    </div>
+    <form className="search-bar-wrapper">
+      <label htmlFor="searchbar"></label>
+      <input type="text" name="searchbar"></input>
+      <button className="icon"><FontAwesomeIcon icon={faSearchDollar} /></button>
+    </form>
   );
 }
 
