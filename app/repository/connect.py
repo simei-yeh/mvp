@@ -22,6 +22,7 @@ def connect(query, qtype="fetch", params=None):
         if qtype == "fetch":
             db_version = cur.fetchall()
             print(db_version)
+
         elif qtype == "insert":
             conn.commit()
             db_version =  'row inserted'

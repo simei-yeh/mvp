@@ -83,15 +83,15 @@ def api_stocks():
 def autosuggest():
     query_parameters = request.args
 
-    autosuggest = query_parameters.get('word')
+    autosuggest = query_parameters.get('ticker')
 
-    query = "SELECT * FROM vol.stocks WHERE"
+    query = "SELECT DISTINCT(symbol) FROM vol.stocks WHERE symbol LIKE %s ORDER BY symbol ASC"
     to_filter = []
 
     if autosuggest:
-        query += ' symbol=(%s) AND'
-        to_filter.append(ticker)
-    if not (autosuggest):
+        modAutosuggest = '%{}%'.format(autosuggest)
+        to_filter.append(modAutosuggest)
+    else:
         return page_not_found(404)
 
     results = connect(query, "fetch", to_filter)
