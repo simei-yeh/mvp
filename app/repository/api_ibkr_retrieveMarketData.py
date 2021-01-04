@@ -23,6 +23,7 @@ def getConId():
           # print(x,y, r)
           stockData = ({key.lower() : r[key] for key in r.keys() & { 'timePeriod','symbol','barLength','volumeFactor','priceFactor','data' }})
           stockData['stockcode'] = '{}-{}-{}'.format(r['symbol'],r['timePeriod'],payload['bar'])
+          stockData['bar'] = '{}'.format(payload['bar'])
         except Exception as exc:
           print ('could not receive stock data ', exc)
           print ('first catch', x, y)

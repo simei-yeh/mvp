@@ -21,7 +21,8 @@ CREATE TABLE vol.stocks (
   pricefactor int NOT NULL,
   volumefactor int NOT NULL,
   timePeriod varchar NOT NULL,
-  barLength numeric(10)
+  barLength numeric(10),
+  bar varchar(10)
 )
 
 -- ---

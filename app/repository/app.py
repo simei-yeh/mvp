@@ -65,7 +65,7 @@ def api_stocks():
         query += ' symbol=(%s) AND'
         to_filter.append(ticker)
     if interval:
-        query += ' barLength=(%s)'
+        query += ' bar=(%s)'
         to_filter.append(interval)
     if not (ticker or interval):
         return page_not_found(404)
