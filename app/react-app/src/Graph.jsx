@@ -28,13 +28,16 @@ class Graph extends React.Component {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
       }
     });
   }
 
   render() {
     return (
-        <canvas ref={this.chartRef} />
+      <canvas ref={this.chartRef} />
     );
   }
 }

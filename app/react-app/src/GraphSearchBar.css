@@ -18,3 +18,41 @@
   font-size: medium;
   opacity: 0.8;
 }
+
+.autosuggestion-bullet {
+  color: darkgray;
+  list-style-type: none;
+  text-align: left;
+  padding: 0.25em;
+  margin-left: 0.25em;
+}
+
+.autosuggestion-bullet:hover {
+background-color: lightcyan;
+color: black;
+}
+
+.autosuggestion-wrapper {
+  display: none;
+}
+
+.searchbar:focus + .autosuggestion-wrapper::after {
+  color: green;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
+
+/* .autosuggestion-wrapper::after {
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -1em;
+
+} */

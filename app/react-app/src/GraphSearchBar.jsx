@@ -20,6 +20,11 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
     setInputChange(true);
   }
 
+  const handleClick = (e) => {
+    e.persist();
+    setValue(e.target.innerHTML.toUpperCase());
+  }
+
   useEffect(() => {
     if (inputChange) {
       console.log('input changed')
@@ -43,7 +48,9 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
     <form className="search-bar-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="searchbar"></label>
       <input type="text" name="searchbar" className="searchbar" onChange={handleInputChange} value={value} placeholder="Type to search ticker"></input>
-
+      <div className="autosuggestion-wrapper">
+      {suggestions.map(a => <li key={a} className="autosuggestion-bullet" value={a} onClick={handleClick}>{a}</li>)}
+      </div>
       <button className="icon"><FontAwesomeIcon icon={faSearchDollar} /></button>
     </form>
   );
