@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      ticker: 'TSLA',
       interval: '30min',
       reddit: [],
       stockGraph: [],
@@ -52,6 +53,7 @@ class App extends React.Component {
       interval = `1${interval.substring(0,1)}`
     }
     this.setState({
+      ticker: ticker,
       interval: interval,
     })
     fetch(`/api/v1/quotes/stocks?ticker=${ticker}&interval=${interval}`, {
@@ -81,7 +83,7 @@ class App extends React.Component {
           <div className="numbers">
             <div className="graph-search-options-wrapper">
               <GraphOptions callback={this.retrieveAdditionalData} />
-              <GraphSearchBar />
+              <GraphSearchBar callback={this.retrieveAdditionalData} />
             </div>
             <Graph data={this.state.stockGraph}
               color="#B08EA2"
