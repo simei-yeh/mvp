@@ -4,6 +4,7 @@ import Reddit from './Reddit.jsx'
 import AltCoins from './AltCoins.jsx'
 import Graph from './Graph.jsx'
 import GraphOptions from './GraphOptions.jsx'
+import GraphSearchBar from './GraphSearchBar.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -68,8 +69,9 @@ class App extends React.Component {
         </div>
         <div className="boxesContainer">
           <div className="numbers">
-            <div>
+            <div className="graph-search-options-wrapper">
               <GraphOptions />
+              <GraphSearchBar />
             </div>
             <Graph data={this.state.stockGraph}
               color="#B08EA2"

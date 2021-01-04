@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import './GraphOptions.css'
+import './GraphSearchBar.css';
 
-const GraphOptions = () => {
+const GraphSearchBar = () => {
   const timeOptions = ['5min', '15min', '30min', 'daily', 'weekly']
 
 
   return (
-    <div className="options-bar-wrapper">
+    <div className="search-bar-wrapper">
       {timeOptions.map(d => <button key={d}>{d}</button>)}
     </div>
   );
 }
 
 
-export default GraphOptions;
+export default GraphSearchBar;
