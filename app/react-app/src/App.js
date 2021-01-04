@@ -12,11 +12,13 @@ class App extends React.Component {
     this.state = {
       ticker: 'TSLA',
       interval: '30min',
+      autosuggest: [],
       reddit: [],
       stockGraph: [],
       altCoinPrices: []
     }
     this.retrieveAdditionalData = this.retrieveAdditionalData.bind(this)
+    this.retrieveAutosuggest = this.retrieveAutosuggest.bind(this)
   }
 
 
@@ -73,6 +75,21 @@ class App extends React.Component {
       )
   }
 
+  retrieveAutosuggest(ticker) {
+    fetch(`api/v1/autosuggest?ticker=${ticker}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then((data) => {
+      this.setState({
+        autosuggest: data
+      })
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -83,7 +100,7 @@ class App extends React.Component {
           <div className="numbers">
             <div className="graph-search-options-wrapper">
               <GraphOptions callback={this.retrieveAdditionalData} />
-              <GraphSearchBar callback={this.retrieveAdditionalData} />
+              <GraphSearchBar callback={this.retrieveAdditionalData} autosuggest={this.retrieveAutosuggest} suggestionsArray={this.state.autosuggest} />
             </div>
             <Graph data={this.state.stockGraph}
               color="#B08EA2"

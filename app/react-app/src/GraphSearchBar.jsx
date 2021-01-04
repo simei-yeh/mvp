@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchDollar } from '@fortawesome/free-solid-svg-icons'
 import './GraphSearchBar.css';
 
-const GraphSearchBar = ({callback, autosuggest}) => {
+const GraphSearchBar = ({callback, autosuggest, suggestionsArray}) => {
   const [value, setValue] = useState('');
   const [submitted, setSubmitted] = useState(false)
+  const [suggestions, setSuggestions] = useState(suggestionsArray)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +16,9 @@ const GraphSearchBar = ({callback, autosuggest}) => {
   const handleInputChange = (e) => {
     e.persist();
     setValue(e.target.value.toUpperCase());
+    autosuggest(value);
+    setSuggestions(suggestionsArray);
+    console.log(suggestions)
   }
 
   useEffect(() => {
