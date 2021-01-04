@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      interval: '30min',
       reddit: [],
       stockGraph: [],
       altCoinPrices: []
@@ -45,11 +46,14 @@ class App extends React.Component {
       })
   }
 
-  retrieveAdditionalData(ticker = this.state.stockGraph[0][2], interval = '30min') {
+  retrieveAdditionalData(ticker = this.state.stockGraph[0][2], interval = this.state.interval) {
     console.log('click!', ticker, interval)
     if (interval === 'daily' || interval === 'weekly') {
       interval = `1${interval.substring(0,1)}`
     }
+    this.setState({
+      interval: interval,
+    })
     fetch(`/api/v1/quotes/stocks?ticker=${ticker}&interval=${interval}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -62,6 +66,9 @@ class App extends React.Component {
           stockGraph: data
         })
       })
+      .catch((response) =>
+        window.alert(`could not retrieve ticker ${ticker} for specified interval ${interval}`)
+      )
   }
 
   render() {
