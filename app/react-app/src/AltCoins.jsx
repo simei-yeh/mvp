@@ -67,11 +67,11 @@ class AltCoins extends React.Component {
             ticks: {
               min: 0, //minimum tick
               max: 40000, //maximum tick
-              callback: function (label, index, values) {
+              callback: (label, index, values) => {
                 return label;//pass tick values as a string into Number function
               },
             },
-            afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
+            afterBuildTicks: (chartObj) => { //Build ticks labelling as per your need
               chartObj.ticks = [];
               chartObj.ticks.push('BTC');
               chartObj.ticks.push('ETH');
