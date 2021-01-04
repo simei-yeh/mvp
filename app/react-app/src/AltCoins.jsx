@@ -58,13 +58,28 @@ class AltCoins extends React.Component {
           xAxes: [{
             gridLines: {
               display: false,
-              tickMarkLength: 0
             },
             scaleLabel: {
               display: true,
-              labelString: 'cryptocurrency'
+              labelString: 'cryptocurrency',
+              align: 'center',
             },
-
+            ticks: {
+              min: 0, //minimum tick
+              max: 40000, //maximum tick
+              callback: function (label, index, values) {
+                return label;//pass tick values as a string into Number function
+              },
+            },
+            afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
+              chartObj.ticks = [];
+              chartObj.ticks.push('BTC');
+              chartObj.ticks.push('ETH');
+              chartObj.ticks.push('BCH');
+              chartObj.ticks.push('LTC');
+              chartObj.ticks.push('DASH');
+              chartObj.ticks.push('EOS');
+            },
           }],
         }
       },
