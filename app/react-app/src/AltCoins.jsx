@@ -38,7 +38,7 @@ class AltCoins extends React.Component {
             position: 'left',
             ticks: {
               min: 0, //minimum tick
-              max: 35000, //maximum tick
+              max: 40000, //maximum tick
               callback: function (value, index, values) {
                 return Number(value.toString());//pass tick values as a string into Number function
               },
@@ -51,7 +51,7 @@ class AltCoins extends React.Component {
               chartObj.ticks.push(1000);
               chartObj.ticks.push(10000);
               chartObj.ticks.push(20000);
-              chartObj.ticks.push(35000);
+              chartObj.ticks.push(40000);
             },
 
           }],
