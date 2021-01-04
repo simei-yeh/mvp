@@ -45,7 +45,7 @@ class App extends React.Component {
       })
   }
 
-  retrieveAdditionalData(ticker = this.state.stockGraph[0][2], interval = 1800) {
+  retrieveAdditionalData(ticker = this.state.stockGraph[0][2], interval = '30min') {
     console.log('click!', ticker, interval)
     if (interval === 'daily' || interval === 'weekly') {
       interval = `1${interval.substring(0,1)}`

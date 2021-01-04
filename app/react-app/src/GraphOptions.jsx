@@ -9,7 +9,6 @@ const GraphOptions = ({callback}) => {
   const handleTimeClick = (event) => {
     event.preventDefault();
     setValue((timeValue) => ({
-      ...timeValue,
       option: event.target.value,
     }));
     console.log('clicked ', timeValue)
