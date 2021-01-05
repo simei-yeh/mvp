@@ -8,11 +8,7 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   const [inputChange, setInputChange] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [suggestions, setSuggestions] = useState(suggestionsArray);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  }
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   const handleInputChange = (e) => {
     e.persist();
@@ -20,10 +16,15 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
     setInputChange(true);
   }
 
-  const handleClick = (e) => {
-    e.persist();
-    setValue(e.target.innerHTML.toUpperCase());
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
   }
+
+   const handleSelection = (e) => {
+    setValue(e.target.innerHTML.toUpperCase())
+    setSuggestions([]);
+   }
 
   useEffect(() => {
     if (inputChange) {
@@ -49,7 +50,7 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
       <label htmlFor="searchbar"></label>
       <input type="text" name="searchbar" className="searchbar" onChange={handleInputChange} value={value} placeholder="Type to search ticker"></input>
       <div className="autosuggestion-wrapper">
-      {suggestions.map(a => <li key={a} className="autosuggestion-bullet" value={a} onClick={handleClick}>{a}</li>)}
+        {suggestions.map(a => <li key={a} className="autosuggestion-bullet" value={a} onClick={handleSelection}>{a}</li>)}
       </div>
       <button className="icon"><FontAwesomeIcon icon={faSearchDollar} /></button>
     </form>

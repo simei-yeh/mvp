@@ -4,8 +4,8 @@
 }
 
 .timeButton,.selectedButton {
-  padding: 0.25em;
-  margin: 0.25em;
+  padding: 0.5em;
+  margin: 0.5em;
   background-color: white;
   border-radius: 5px;
   border: 0.1em solid;

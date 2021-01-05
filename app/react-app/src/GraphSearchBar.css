@@ -1,12 +1,20 @@
 .search-bar-wrapper {
+  position: relative;
   display: inline-block;
-  padding: 1em;
+  border: 0.1em lightgray solid;
+  border-radius: 5px;
+  margin-left: 0.5em;
 }
+
 
 .searchbar, .icon {
   padding: 0.25em;
   margin: 0.25em;
-  margin-right: 0.25em;
+}
+
+input {
+  outline: 0px;
+  border: 0px;
 }
 
 .icon {
@@ -20,7 +28,10 @@
 }
 
 .autosuggestion-bullet {
-  color: darkgray;
+  z-index: 99;
+  flex: 1 1;
+  background-color: white;
+  color: black;
   list-style-type: none;
   text-align: left;
   padding: 0.25em;
@@ -33,26 +44,8 @@ color: black;
 }
 
 .autosuggestion-wrapper {
-  display: none;
-}
-
-.searchbar:focus + .autosuggestion-wrapper::after {
-  color: green;
-  content: '';
-  display: block;
   position: absolute;
-  top: 100%;
-  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-
-/* .autosuggestion-wrapper::after {
-  content: '';
-  display: block;
-  height: 0;
-  width: 0;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -1em;
-
-} */
