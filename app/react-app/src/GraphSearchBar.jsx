@@ -6,8 +6,10 @@ import './GraphSearchBar.css';
 const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   const [value, setValue] = useState('');
   const [inputChange, setInputChange] = useState(false);
+  const [selectDropDown, setselectDropDown] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [suggestions, setSuggestions] = useState(suggestionsArray);
+  const [suggestions, setSuggestions] = useState([]);
+  const [suggestionsBool, setsuggestionsBool] = useState(false);
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   const handleInputChange = (e) => {
@@ -24,17 +26,24 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
    const handleSelection = (e) => {
     setValue(e.target.innerHTML.toUpperCase())
     setSuggestions([]);
+    setselectDropDown(true)
    }
 
   useEffect(() => {
+    console.log('use effect')
     if (inputChange) {
       console.log('input changed')
       autosuggest(value)
       setInputChange(false);
-    } else {
+      setsuggestionsBool(true)
+    } else if (selectDropDown) {
+      console.log('selectDropDown')
+      setselectDropDown(false)
+      setsuggestionsBool(false)
+    } else if (suggestionsBool) {
       setSuggestions(suggestionsArray)
     }
-  }, [inputChange, suggestionsArray, autosuggest, value])
+  }, [inputChange, suggestionsArray, autosuggest, value, selectDropDown, suggestionsBool])
 
   useEffect(() => {
     if (submitted) {
@@ -46,7 +55,7 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   }, [submitted, callback, value])
 
   return (
-    <form className="search-bar-wrapper" onSubmit={handleSubmit}>
+    <form className="search-bar-wrapper" onSubmit={handleSubmit} autoComplete="off">
       <label htmlFor="searchbar"></label>
       <input type="text" name="searchbar" className="searchbar" onChange={handleInputChange} value={value} placeholder="Type to search ticker"></input>
       <div className="autosuggestion-wrapper">

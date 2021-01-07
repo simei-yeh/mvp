@@ -89,7 +89,7 @@ def autosuggest():
     to_filter = []
 
     if autosuggest:
-        modAutosuggest = '%{}%'.format(autosuggest)
+        modAutosuggest = '{}%'.format(autosuggest)
         to_filter.append(modAutosuggest)
     else:
         return page_not_found(404)
