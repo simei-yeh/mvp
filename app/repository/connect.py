@@ -33,7 +33,7 @@ def fetch(query, params=None):
             conn.close()
 
 
-def insert(query, qtype="fetch", params=None):
+def insert(query, params=None):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:

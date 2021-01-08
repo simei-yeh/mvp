@@ -1,6 +1,6 @@
 print("Hello world")
 
-from connect import connect
+from connect import insert, fetch
 import requests
 import json
 
@@ -13,7 +13,7 @@ def getConId():
     endpoint="https://localhost:8080/v1/api/iserver/marketdata/history"
 
     query0 = "SELECT conid from vol.conid"
-    conids = connect(query0, "fetch")
+    conids = fetch(query0)
 
     for x in conids:
       for y in timeOpts:
@@ -35,7 +35,7 @@ def getConId():
           (SELECT data FROM json_populate_record (NULL::vol.stocks,'{}'))".format(formatted,formatted)
 
         try:
-          results = connect(query,"insert")
+          results = insert(query)
         except Exception as exc:
           print('could not insert ', exc)
           print('second catch ', x, y)

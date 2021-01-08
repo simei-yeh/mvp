@@ -1,6 +1,6 @@
 print("Hello world")
 
-from connect import connect
+from connect import insert
 import requests
 import json
 
@@ -25,7 +25,7 @@ def getConId():
          ON CONFLICT (conid) DO UPDATE SET(opt) = \
               (SELECT opt FROM json_populate_record (NULL::vol.conid,'{}'))".format(formatted,formatted)
 
-        results = connect(query,"insert")
+        results = insert(query)
         print(results, '', x)
 
 

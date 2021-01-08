@@ -1,6 +1,6 @@
 print("Hello world")
 
-from connect import fetch
+from connect import insert
 from flask_socketio import SocketIO
 import random
 import tokens
@@ -62,7 +62,7 @@ def scrapeReddit():
                 query = "INSERT INTO vol.wsb SELECT * FROM json_populate_record (NULL::vol.wsb,'{}') \
                   ON CONFLICT (rankcode) DO UPDATE SET(score,ups,upvote_ratio,num_comments,weighted_score) = (SELECT score,ups,upvote_ratio,num_comments,weighted_score FROM json_populate_record (NULL::vol.wsb,'{}'))".format(queryObj, queryObj)
 
-                results = fetch(query,"insert")
+                results = insert(query)
                 # print(results)
     print(count)
 
