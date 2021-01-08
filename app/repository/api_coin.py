@@ -1,6 +1,6 @@
 print("Hello world")
 
-from connect import connect
+import connect
 import tokens
 import requests
 import json
@@ -32,7 +32,7 @@ def coinQuotes():
         query = "INSERT INTO vol.crypto (time,asset_id_base,asset_id_quote,rate)  \
             SELECT time,asset_id_base,asset_id_quote,rate FROM json_populate_record (NULL::vol.crypto,'{}')".format(data, data)
 
-        res = connect(query,"insert")
+        res = connect.insert(query)
 
     # copy data into database
     print(len(r['rates']))

@@ -1,4 +1,4 @@
-from .config import config
+from config import config
 import psycopg2
 
 def fetch(query, params=None):
