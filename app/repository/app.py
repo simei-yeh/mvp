@@ -1,6 +1,6 @@
 import flask
 from flask import request, jsonify
-from .connect import connect
+from .connect import fetch, insert
 import psycopg2
 
 app = flask.Flask(__name__)
@@ -10,11 +10,11 @@ app.config["DEBUG"] = True
 @app.route('/api', methods=['GET'])
 def home():
     query1 = "SELECT SUM(b.weighted_score) as total_w_score, SUM(b.num_comments) as tot_comments, SUM(b.score) as tot_score, b.ticker, count(b.name) FROM vol.wsb b WHERE to_timestamp(b.   created) > (current_timestamp - interval '1 day') GROUP BY b.ticker order by total_w_score desc"
-    results=connect(query1,"fetch")
+    results=fetch(query1)
     query2 = "SELECT * FROM vol.stocks WHERE stockcode = 'TSLA-2w-30min'"
-    results2=connect(query2, "fetch")
+    results2=fetch(query2)
     query3 = "SELECT * FROM (SELECT DISTINCT ON (c.asset_id_quote) c.time,c.asset_id_quote,c.rate FROM vol.crypto c WHERE c.asset_id_quote in ('BTC','ETH','BCH','LTC','EOS','DASH')  ORDER BY c.asset_id_quote, c.time desc) as a ORDER BY a.rate desc"
-    results3=connect(query3, "fetch")
+    results3=fetch(query3)
     return jsonify(results, results2, results3)
 
 
@@ -45,7 +45,7 @@ def api_crypto():
     # strip the last AND from the query
     query = query[:-4]
 
-    results = connect(query, "fetch", to_filter)
+    results = fetch(query, to_filter)
     print(results)
 
     return jsonify(results)
@@ -70,7 +70,7 @@ def api_stocks():
     if not (ticker or interval):
         return page_not_found(404)
 
-    results = connect(query, "fetch", to_filter)
+    results = fetch(query, to_filter)
     print(results)
 
     if not results:
@@ -94,7 +94,7 @@ def autosuggest():
     else:
         return page_not_found(404)
 
-    results = connect(query, "fetch", to_filter)
+    results = fetch(query, "fetch", to_filter)
     print(results)
 
     if not results:
