@@ -1,6 +1,10 @@
+import os
+import sys
+sys.path.append(os.path.realpath('.'))
+
 import flask
 from flask import request, jsonify
-from .connect import fetch, insert
+from database.connect import fetch, insert
 import psycopg2
 
 app = flask.Flask(__name__)
