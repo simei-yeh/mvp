@@ -3,3 +3,4 @@ database.ini
 tokens.py
 *tokens*
 *config*
+*.pem
