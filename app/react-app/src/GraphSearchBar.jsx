@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchDollar } from '@fortawesome/free-solid-svg-icons'
 import './GraphSearchBar.css';
+import useDebounce from './use-debounce.jsx';
+
 
 const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   const [value, setValue] = useState('');
@@ -10,7 +12,7 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   const [submitted, setSubmitted] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionsBool, setsuggestionsBool] = useState(false);
-  const [debouncedValue, setDebouncedValue] = useState(value);
+
 
   const handleInputChange = (e) => {
     e.persist();
