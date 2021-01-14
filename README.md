@@ -15,8 +15,6 @@ Trading site to provide stock/options trending suggestions from reddit and aggre
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
 - Python 3.8
 - Node 6.13.0
 
