@@ -2,6 +2,15 @@
 
 Trading site to provide stock/options trending suggestions from reddit and aggregate real-time stock/options/cryptocurrency information 
 
+ <div align="center">
+   [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://youtu.be/JIsFDk55-_0)
+</div>
+<div align="center">
+  <img src="https://homesweet.s3.us-east-2.amazonaws.com/tour1.PNG" height="275">
+  <img src="https://homesweet.s3.us-east-2.amazonaws.com/tour2.PNG" height="275">
+</div>
+
+
 ## Table of Contents
 
 1. [Usage](#Usage)
