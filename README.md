@@ -43,30 +43,65 @@ npm run build
 API endpoints conform to a RESTful API architecture to retrieve and modify database-hosted information. All responses will include HTTP response codes to indicate status and errors and data will come in JSON. All requests must include a Content-Type of application/json and the body must be valid JSON.
 
 **```GET``` /api**
-- ```GET``` request for home page
-- No request object is required
-- Successful response code: ```200```
-- Response will be a JSON object that contains the following information:
+• ```GET``` request for home page
+• No request object is required
+• Successful response code: ```200```
+• The default stock information will always be Tesla's 30-min chart.
+• Response will be a JSON object that contains the following information:
 
 ```sh
-
+[ 
+  [
+   weighted popularity Decimal, 
+   comments Integer, 
+   upvotes Integer, 
+   ticker String, 
+   count Integer
+  ],
+  [
+   stockCode (String), 
+   timestamp (time object),
+   ticker symbol (String),
+   historical price [{
+   'open': decimal,
+   'close': decimal,
+   'high': decimal,
+   'low': decimal,
+   'volume': integer,
+   't': time since Unix epoch,
+   }]
+   priceFactor (Integer),
+   timePeriod (String),
+   barLength (Number in seconds),
+   time period (String)
+  ],
+  [
+   timestamp Date object,
+   asset_id_quote String,
+   price Decimal
+  ]
+]
 ```
 
 **GET /api/v1/quotes/:cryptoid**
-- GET request for crypto prices
-- Successful response code: ```200```
-- Request parameter of :cryptoid from API endpoint will be accepted. No request object is required.
-- Response will be a JSON object that contains historical prices information vs USD for the respective crypto:
+• GET request for crypto prices
+• Successful response code: ```200```
+• Request parameter of :cryptoid from API endpoint will be accepted. No request object is required.
+• Response will be a JSON object that contains historical prices information vs USD for the respective crypto:
 
 ```sh
-
+  [
+   timestamp Date object,
+   asset_id_quote String,
+   price Decimal
+  ]
 ```
 
 **GET /api/v1/quotes/stocks**
-- GET request for landing page
-- Successful response code: ```200```
-- Request parameter of :listingid from API endpoint will be accepted. No request object is required.
-- Response will be a JSON object that contains the following information:
+• GET request for landing page
+• Successful response code: ```200```
+• Request parameter of :listingid from API endpoint will be accepted. No request object is required.
+• Response will be a JSON object that contains the following information:
 ```sh
 [
   stockCode (String), 
@@ -88,10 +123,10 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 ```
 
 **GET /api/v1/quotes/autosuggest**
-- GET request for landing page
-- Successful response code: ```200```
-- Request parameter of :listingid from API endpoint will be accepted. No request object is required.
-- Response will be a JSON object that contains an array of available tickers. For example, if the request was for 'AM', results would be:
+• GET request for landing page
+• Successful response code: ```200```
+• Request parameter of :listingid from API endpoint will be accepted. No request object is required.
+• Response will be a JSON object that contains an array of available tickers. For example, if the request was for 'AM', results would be:
 ```sh
 [
  'AMAT',
