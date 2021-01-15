@@ -31,6 +31,7 @@ Developed using Python and create-react-app. To start a development bundle and s
 ```sh
 npm run start
 npm run start-flask-api
+npm run build
 ```
 
 ## Installing Dependencies
@@ -39,8 +40,6 @@ From within the root directory:
 
 ```sh
 npm install
-npm run start
-npm run build
 ```
 
 ## API Endpoints
