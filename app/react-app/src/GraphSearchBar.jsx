@@ -13,6 +13,7 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionsBool, setsuggestionsBool] = useState(false);
 
+  const debouncedSearchTerm = useDebounce(value, 500);
 
   const handleInputChange = (e) => {
     e.persist();
@@ -31,21 +32,28 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
     setselectDropDown(true)
    }
 
-  useEffect(() => {
-    console.log('use effect')
-    if (inputChange) {
-      console.log('input changed')
-      autosuggest(value)
-      setInputChange(false);
+   useEffect(() => {
+    if (debouncedSearchTerm) {
+      autosuggest(debouncedSearchTerm)
       setsuggestionsBool(true)
-    } else if (selectDropDown) {
+     }
+  }, [debouncedSearchTerm])
+
+  useEffect(() => {
+    console.log('use suggestions')
+    if (suggestionsBool) {
+      setSuggestions(suggestionsArray)
+    }
+  }, [suggestionsArray])
+
+  useEffect(() => {
+    console.log('use dropdown')
+    if (selectDropDown) {
       console.log('selectDropDown')
       setselectDropDown(false)
       setsuggestionsBool(false)
-    } else if (suggestionsBool) {
-      setSuggestions(suggestionsArray)
     }
-  }, [inputChange, suggestionsArray, autosuggest, value, selectDropDown, suggestionsBool])
+  }, [selectDropDown])
 
   useEffect(() => {
     if (submitted) {
@@ -59,7 +67,7 @@ const GraphSearchBar = ({ callback, autosuggest, suggestionsArray }) => {
   return (
     <form className="search-bar-wrapper" onSubmit={handleSubmit} autoComplete="off">
       <label htmlFor="searchbar"></label>
-      <input type="text" name="searchbar" className="searchbar" onChange={handleInputChange} value={value} placeholder="Type to search ticker"></input>
+      <input type="text" name="searchbar" className="searchbar" onChange={e => setValue(e.target.value.toUpperCase())} value={value} placeholder="Type to search ticker"></input>
       <div className="autosuggestion-wrapper">
         {suggestions.map(a => <li key={a} className="autosuggestion-bullet" value={a} onClick={handleSelection}>{a}</li>)}
       </div>
