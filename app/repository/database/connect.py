@@ -23,7 +23,6 @@ def fetch(query, params=None):
 
         # display the results of the query
         db_version = cur.fetchall()
-        print(db_version)
 
         # return the results to the API
         return db_version
