@@ -12,6 +12,7 @@ Trading site to provide stock/options trending suggestions from reddit and aggre
 
 ## Usage
 
+• Access the app through app/react-app
 
 ## Requirements
 
@@ -19,6 +20,13 @@ Trading site to provide stock/options trending suggestions from reddit and aggre
 - Node 6.13.0
 
 ## Development
+
+Developed using Python and create-react-app. To start a development bundle and server, navigate to app/react-app and run:
+
+```sh
+npm run start
+npm run start-flask-api
+```
 
 ## Installing Dependencies
 
@@ -49,6 +57,7 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 - Successful response code: ```200```
 - Request parameter of :cryptoid from API endpoint will be accepted. No request object is required.
 - Response will be a JSON object that contains historical prices information vs USD for the respective crypto:
+
 ```sh
 
 ```
@@ -92,4 +101,3 @@ API endpoints conform to a RESTful API architecture to retrieve and modify datab
 ]
 ```
 
-``
