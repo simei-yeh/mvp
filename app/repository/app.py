@@ -19,7 +19,8 @@ def home():
     results2=fetch(query2)
     query3 = "SELECT * FROM (SELECT DISTINCT ON (c.asset_id_quote) c.time,c.asset_id_quote,c.rate FROM vol.crypto c WHERE c.asset_id_quote in ('BTC','ETH','BCH','LTC','EOS','DASH')  ORDER BY c.asset_id_quote, c.time desc) as a ORDER BY a.rate desc"
     results3=fetch(query3)
-    return jsonify(results, results2, results3)
+    response = jsonify(results, results2, results3)
+    return response
 
 
 @app.errorhandler(404)
@@ -98,7 +99,7 @@ def autosuggest():
     else:
         return page_not_found(404)
 
-    results = fetch(query, "fetch", to_filter)
+    results = fetch(query, to_filter)
     print(results)
 
     if not results:

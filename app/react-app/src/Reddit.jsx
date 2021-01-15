@@ -54,7 +54,7 @@ class Reddit extends React.Component {
             position: 'left',
             ticks: {
               min: 0, //minimum tick
-              max: 30000, //maximum tick
+              max: 75000, //maximum tick
               display: false,
               callback: function (value, index, values) {
                 return Number(value.toString());//pass tick values as a string into Number function
@@ -77,7 +77,7 @@ class Reddit extends React.Component {
             ticks: {
               display: false,
               min: 0, //minimum tick
-              max: 8000, //maximum tick
+              max: 25000, //maximum tick
               callback: function (value, index, values) {
                 return value;
               },
