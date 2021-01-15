@@ -3,8 +3,7 @@
 Trading site to provide stock/options trending suggestions from reddit and aggregate real-time stock/options/cryptocurrency information 
 
 <div align="center">
-  <img src="https://tradetheta.s3-us-west-1.amazonaws.com/theta1.PNG" height="400">
-  <img src="https://tradetheta.s3-us-west-1.amazonaws.com/theta2.PNG" height="400">
+  <img src="https://tradetheta.s3-us-west-1.amazonaws.com/theta1.PNG" height="800">
 </div>
 
 
